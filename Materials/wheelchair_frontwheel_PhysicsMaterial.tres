@@ -1,0 +1,6 @@
+[gd_resource type="PhysicsMaterial" format=3 uid="uid://dtjf6faulf533"]
+
+[resource]
+friction = 0.08
+bounce = 0.2
+absorbent = true

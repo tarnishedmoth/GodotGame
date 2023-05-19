@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbvq6o6c8b6qc"]
+
+[ext_resource type="SystemFont" uid="uid://b7bjjt57hsrgp" path="res://Main_Font.tres" id="1_2ri7e"]
+[ext_resource type="Script" path="res://ScoreLabel.gd" id="2_b67vt"]
+[ext_resource type="AudioStream" uid="uid://dl7nyty4n7k3v" path="res://Assets/IRL/brogans_bell.wav" id="3_3fmd6"]
+[ext_resource type="Script" path="res://Scripts/crescendo.gd" id="4_jcsb5"]
+
+[sub_resource type="Theme" id="Theme_8vu1u"]
+default_font = ExtResource("1_2ri7e")
+default_font_size = 24
+
+[node name="UserInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8vu1u")
+
+[node name="ScoreLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 59.0
+offset_top = 60.0
+offset_right = 246.0
+offset_bottom = 104.0
+text = "Did you win?: not yet."
+script = ExtResource("2_b67vt")
+label = "Did you win?: %s"
+
+[node name="Win_AudioPlayer" type="AudioStreamPlayer" parent="ScoreLabel"]
+stream = ExtResource("3_3fmd6")
+volume_db = -4.0
+max_polyphony = 4
+bus = &"BlownOut"
+script = ExtResource("4_jcsb5")
+crescendo_rate = 0.01

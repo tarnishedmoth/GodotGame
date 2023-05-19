@@ -1,0 +1,126 @@
+[gd_scene load_steps=11 format=3 uid="uid://dcotg6x5t8xg2"]
+
+[ext_resource type="Environment" uid="uid://dkoxu1wkjfcf" path="res://Environments/Dusk.tres" id="1_vd2sw"]
+[ext_resource type="Shader" path="res://Shaders/TexturedSkyWithClouds.gdshader" id="2_f1uu4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bt6aj"]
+shader = ExtResource("2_f1uu4")
+shader_parameter/add_clouds = true
+shader_parameter/clouds_below = false
+shader_parameter/cloud_scale = 0.45
+shader_parameter/speed = 0.003
+shader_parameter/cloud_dark = 0.4
+shader_parameter/cloud_light = 0.33
+shader_parameter/cloud_cover = 0.4
+shader_parameter/cloud_alpha = 5.07
+shader_parameter/sky_tint = 0.5
+shader_parameter/height_offset = 0.707
+shader_parameter/sky_contribution = 0.5
+
+[sub_resource type="Sky" id="Sky_os0fb"]
+sky_material = SubResource("ShaderMaterial_bt6aj")
+
+[sub_resource type="Environment" id="Environment_am3xt"]
+background_mode = 2
+sky = SubResource("Sky_os0fb")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+ssao_enabled = true
+ssao_radius = 0.5
+ssao_intensity = 4.0
+ssao_power = 0.2
+ssao_detail = 0.3
+ssao_sharpness = 0.79
+ssil_enabled = true
+ssil_radius = 7.0
+sdfgi_enabled = true
+sdfgi_bounce_feedback = 0.6
+sdfgi_min_cell_size = 0.5
+sdfgi_energy = 1.2
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.001
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_length = 48.0
+volumetric_fog_ambient_inject = 0.01
+volumetric_fog_temporal_reprojection_amount = 0.99
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8rf61"]
+noise_type = 3
+seed = 333
+frequency = 0.008
+fractal_type = 3
+fractal_weighted_strength = 0.14
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fv7sb"]
+width = 1024
+height = 1024
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 0.127
+normalize = false
+noise = SubResource("FastNoiseLite_8rf61")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_frstw"]
+sky_top_color = Color(0.305882, 0.321569, 0.505882, 1)
+sky_horizon_color = Color(0.576471, 0.290196, 0.00784314, 1)
+sky_curve = 0.235375
+sky_energy_multiplier = 0.9
+sky_cover = SubResource("NoiseTexture2D_fv7sb")
+sky_cover_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+ground_curve = 0.00517636
+sun_angle_max = 41.69
+sun_curve = 0.178381
+
+[sub_resource type="Sky" id="Sky_c8bh2"]
+sky_material = SubResource("ProceduralSkyMaterial_frstw")
+
+[sub_resource type="Environment" id="Environment_87m2w"]
+background_mode = 2
+sky = SubResource("Sky_c8bh2")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+ssao_enabled = true
+ssao_radius = 0.5
+ssil_enabled = true
+ssil_radius = 7.0
+sdfgi_enabled = true
+sdfgi_bounce_feedback = 0.6
+sdfgi_min_cell_size = 0.5
+sdfgi_energy = 1.2
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.001
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_length = 48.0
+volumetric_fog_ambient_inject = 0.01
+volumetric_fog_temporal_reprojection_amount = 0.99
+
+[node name="Environment" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.183951, 0.326493, -0.927127, 0, 0.943223, 0.332161, 0.982935, -0.0611014, 0.173507, 0, 0, 0)
+light_color = Color(0.576471, 0.403922, 0.184314, 1)
+light_energy = 2.0
+light_indirect_energy = 0.8
+light_volumetric_fog_energy = 0.8
+light_angular_distance = 0.9
+shadow_enabled = true
+shadow_transmittance_bias = 0.5
+shadow_blur = 1.1
+directional_shadow_split_1 = 0.04
+directional_shadow_split_2 = 0.14
+directional_shadow_split_3 = 0.35
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 150.0
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_vd2sw")
+
+[node name="WorldEnvironment3" type="WorldEnvironment" parent="."]
+process_mode = 4
+environment = SubResource("Environment_am3xt")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+process_mode = 4
+environment = SubResource("Environment_87m2w")

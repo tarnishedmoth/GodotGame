@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ch4lri6iq8j14"
+path="res://.godot/imported/billboardLow.obj-6038ed8fa0ba90c5922198c9f9ee7857.mesh"
+
+[deps]
+
+files=["res://.godot/imported/billboardLow.obj-6038ed8fa0ba90c5922198c9f9ee7857.mesh"]
+
+source_file="res://Assets/Kenney/Racing Kit/Models/OBJ format/billboardLow.obj"
+dest_files=["res://.godot/imported/billboardLow.obj-6038ed8fa0ba90c5922198c9f9ee7857.mesh", "res://.godot/imported/billboardLow.obj-6038ed8fa0ba90c5922198c9f9ee7857.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

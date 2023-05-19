@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq144qrdal1wr"]
+
+[sub_resource type="Curve3D" id="Curve3D_aaqid"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -20, 0, 0, 0, 0, 0, 0, -20, 0, -20, 0, 0, 0, 0, 0, 0, -20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="level_2" type="Node3D"]
+
+[node name="level" type="Node3D" parent="."]
+
+[node name="Stairs" type="Path3D" parent="level"]
+curve = SubResource("Curve3D_aaqid")
+
+[node name="Steps" type="CSGPolygon3D" parent="level/Stairs"]
+polygon = PackedVector2Array(0, 0, 0, 0.5, 0, 1, 0.25, 1, 0.25, 0.75, 0.5, 0.75, 0.5, 0.5, 0.75, 0.5, 0.75, 0.25, 1, 0.25, 1, 0, 0.5, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 1
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false

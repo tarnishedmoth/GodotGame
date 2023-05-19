@@ -1,0 +1,358 @@
+[gd_scene load_steps=21 format=3 uid="uid://bkosglkth7pjo"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_pphfu"]
+[ext_resource type="Material" uid="uid://dumh0lj22ut5s" path="res://Assets/grid_green.tres" id="2_u2w57"]
+[ext_resource type="Script" path="res://Scripts/Character.gd" id="3_7scf3"]
+[ext_resource type="Material" uid="uid://d3kofh6dj6fxl" path="res://Assets/character_material.tres" id="3_cwb7k"]
+[ext_resource type="AudioStream" uid="uid://broi8j6obwk25" path="res://Assets/Sounds/218301__splicesound__bike-tire-on-dirt-road.wav" id="3_jrxid"]
+[ext_resource type="PhysicsMaterial" uid="uid://mhuqlvlrhaql" path="res://Materials/wheelchair_wheel_PhysicsMaterial.tres" id="3_umvlf"]
+[ext_resource type="Script" path="res://Scripts/WheelLeft.gd" id="4_dlwi8"]
+[ext_resource type="Script" path="res://Scripts/WheelRight.gd" id="5_08aqg"]
+[ext_resource type="AudioStream" uid="uid://c7ftw63kxx100" path="res://Assets/Sounds/467422__hasean__bicycle-gear.wav" id="5_aclrp"]
+[ext_resource type="PhysicsMaterial" uid="uid://dtjf6faulf533" path="res://Materials/wheelchair_frontwheel_PhysicsMaterial.tres" id="6_xpxf3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vjb00"]
+size = Vector3(0.66, 0.4, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_16se5"]
+material = ExtResource("2_u2w57")
+size = Vector3(0.6, 0.04, 0.6)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q4lgs"]
+material = ExtResource("3_cwb7k")
+radius = 0.11
+height = 0.28
+radial_segments = 32
+rings = 6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6wh2u"]
+margin = 0.1
+size = Vector3(0.19, 0.26, 0.19)
+
+[sub_resource type="Curve3D" id="Curve3D_5gy5g"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0.12, 0, 0, 0, 0, 0, 0.011, 0, 0, 0, 0, -0.18, 0.22, 0, 0, 0, 0, 0, 0, 0, -0.094, 0.1, 0, 0, 0, 0, 0, 0, 0, -0.08, -0.059, 0, 0, 0, 0, 0, 0, 0, -0.142, -0.185, 0, 0, 0, 0, 0, -0.012, 0, -0.209, -0.297, 0, 0, -0.135, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+up_vector_enabled = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_vurv2"]
+material = ExtResource("3_cwb7k")
+size = Vector3(0.025, 0.174, 0.094)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2d27e"]
+height = 0.05
+radius = 0.33
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3dlec"]
+height = 0.02
+radius = 0.08
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jb7w7"]
+height = 0.02
+radius = 0.08
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3wm55"]
+margin = 0.1
+radius = 0.75
+
+[node name="Player" type="RigidBody3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+collision_priority = 2.0
+mass = 50.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0.5, 0.3)
+continuous_cd = true
+can_sleep = false
+script = ExtResource("1_pphfu")
+WheelRadius = 0.3
+MaxHandSpeed = 0.05
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 0)
+shape = SubResource("BoxShape3D_vjb00")
+
+[node name="Chair" type="Node3D" parent="."]
+
+[node name="Seat" type="MeshInstance3D" parent="Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507093, 0.0227659)
+gi_mode = 2
+mesh = SubResource("BoxMesh_16se5")
+
+[node name="Seat2" type="MeshInstance3D" parent="Chair"]
+transform = Transform3D(1, 0, 0, 0, 0.130007, -0.991513, 0, 0.991513, 0.130007, 0, 0.80484, -0.30915)
+gi_mode = 2
+mesh = SubResource("BoxMesh_16se5")
+
+[node name="Seat3" type="MeshInstance3D" parent="Chair"]
+transform = Transform3D(1, 0, 0, 0, 0.987181, -0.159606, 0, 0.159606, 0.987181, 0, 0.233305, 0.246899)
+gi_mode = 2
+mesh = SubResource("BoxMesh_16se5")
+
+[node name="Character" type="Node3D" parent="Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.609298, -0.172755)
+script = ExtResource("3_7scf3")
+
+[node name="HeadJoint" type="Generic6DOFJoint3D" parent="Chair/Character"]
+node_a = NodePath("../../..")
+node_b = NodePath("../HeadRigidBody")
+solver_priority = 3
+linear_limit_x/upper_distance = 0.05
+linear_limit_x/lower_distance = 0.05
+linear_limit_y/upper_distance = 0.05
+linear_limit_y/lower_distance = 0.05
+linear_limit_z/upper_distance = 0.05
+linear_limit_z/lower_distance = 0.05
+linear_spring_x/stiffness = 2.0
+linear_spring_x/damping = 0.5
+linear_spring_y/stiffness = 2.0
+linear_spring_y/damping = 0.5
+linear_spring_z/stiffness = 2.0
+linear_spring_z/damping = 0.5
+angular_limit_x/lower_angle = -0.0523599
+angular_limit_x/softness = 0.09
+angular_limit_x/damping = 0.1
+angular_limit_x/force_limit = 20.0
+angular_limit_y/upper_angle = 0.0698132
+angular_limit_y/lower_angle = -0.0698132
+angular_limit_y/softness = 0.09
+angular_limit_y/damping = 0.1
+angular_limit_y/force_limit = 20.0
+angular_limit_z/upper_angle = 0.0698132
+angular_limit_z/lower_angle = -0.0698132
+angular_limit_z/softness = 0.09
+angular_limit_z/damping = 0.1
+angular_limit_z/force_limit = 20.0
+angular_spring_x/stiffness = 10000.0
+angular_spring_x/damping = 5.0
+angular_spring_y/stiffness = 10000.0
+angular_spring_y/damping = 5.0
+angular_spring_z/stiffness = 10000.0
+angular_spring_z/damping = 5.0
+
+[node name="HeadRigidBody" type="RigidBody3D" parent="Chair/Character"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.612322, -0.0638277)
+input_ray_pickable = false
+mass = 12.0
+
+[node name="HeadMesh" type="MeshInstance3D" parent="Chair/Character/HeadRigidBody"]
+gi_mode = 0
+mesh = SubResource("CapsuleMesh_q4lgs")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chair/Character/HeadRigidBody"]
+shape = SubResource("BoxShape3D_6wh2u")
+
+[node name="LeftHandPath" type="Path3D" parent="Chair/Character"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.436998, 0.08, 0.17)
+curve = SubResource("Curve3D_5gy5g")
+
+[node name="PathFollower" type="PathFollow3D" parent="Chair/Character/LeftHandPath"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999976, 0, 0, 0, 0.999974, 0, 0, 0)
+rotation_mode = 0
+tilt_enabled = false
+
+[node name="HandMesh" type="MeshInstance3D" parent="Chair/Character/LeftHandPath/PathFollower"]
+transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 0, 0)
+gi_mode = 0
+mesh = SubResource("BoxMesh_vurv2")
+
+[node name="RightHandPath" type="Path3D" parent="Chair/Character"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.437, 0.08, 0.17)
+curve = SubResource("Curve3D_5gy5g")
+
+[node name="PathFollower" type="PathFollow3D" parent="Chair/Character/RightHandPath"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999976, 0, 0, 0, 0.999974, 0, 0, 0)
+rotation_mode = 0
+tilt_enabled = false
+
+[node name="HandMesh" type="MeshInstance3D" parent="Chair/Character/RightHandPath/PathFollower"]
+transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 0, 0)
+gi_mode = 0
+mesh = SubResource("BoxMesh_vurv2")
+
+[node name="Lap" type="Node3D" parent="Chair/Character"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.88178e-16, 0.0799544, 0.200049)
+
+[node name="AudioSpeed3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_jrxid")
+volume_db = -18.0
+unit_size = 20.0
+doppler_tracking = 2
+
+[node name="WheelLeft" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.35, 0)
+mass = 6.0
+physics_material_override = ExtResource("3_umvlf")
+continuous_cd = true
+can_sleep = false
+angular_damp = 1.0
+script = ExtResource("4_dlwi8")
+Strength = 32.0
+
+[node name="WheelCSG" type="CSGCylinder3D" parent="WheelLeft"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+gi_mode = 0
+radius = 0.33
+height = 0.05
+sides = 48
+smooth_faces = false
+material = ExtResource("2_u2w57")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WheelLeft"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_2d27e")
+
+[node name="AudioRatchet3D" type="AudioStreamPlayer3D" parent="WheelLeft"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+stream = ExtResource("5_aclrp")
+volume_db = -18.0
+bus = &"Wheels"
+emission_angle_degrees = 90.0
+emission_angle_filter_attenuation_db = -4.0
+doppler_tracking = 2
+
+[node name="WheelRight" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.35, 0)
+mass = 6.0
+physics_material_override = ExtResource("3_umvlf")
+continuous_cd = true
+can_sleep = false
+angular_damp = 1.0
+script = ExtResource("5_08aqg")
+Strength = 32.0
+
+[node name="WheelCSG" type="CSGCylinder3D" parent="WheelRight"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+gi_mode = 0
+radius = 0.33
+height = 0.05
+sides = 48
+smooth_faces = false
+material = ExtResource("2_u2w57")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WheelRight"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_2d27e")
+
+[node name="AudioRatchet3D" type="AudioStreamPlayer3D" parent="WheelRight"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+stream = ExtResource("5_aclrp")
+volume_db = -18.0
+bus = &"Wheels"
+emission_angle_degrees = 90.0
+emission_angle_filter_attenuation_db = -4.0
+doppler_tracking = 2
+
+[node name="WheelLeftFront" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.1, 0.5)
+mass = 2.0
+physics_material_override = ExtResource("6_xpxf3")
+continuous_cd = true
+can_sleep = false
+angular_damp = 10.0
+
+[node name="WheelCSG" type="CSGCylinder3D" parent="WheelLeftFront"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+gi_mode = 0
+radius = 0.08
+height = 0.02
+sides = 24
+smooth_faces = false
+material = ExtResource("2_u2w57")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WheelLeftFront"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_3dlec")
+
+[node name="WheelRightFront" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.1, 0.5)
+mass = 2.0
+physics_material_override = ExtResource("6_xpxf3")
+continuous_cd = true
+can_sleep = false
+angular_damp = 10.0
+
+[node name="WheelCSG" type="CSGCylinder3D" parent="WheelRightFront"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+gi_mode = 0
+radius = 0.08
+height = 0.02
+sides = 24
+smooth_faces = false
+material = ExtResource("2_u2w57")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WheelRightFront"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_jb7w7")
+
+[node name="AxleLeft" type="Generic6DOFJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.35, 0)
+node_a = NodePath("..")
+node_b = NodePath("../WheelLeft")
+angular_limit_x/enabled = false
+
+[node name="AxleRight" type="Generic6DOFJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.35, 0)
+node_a = NodePath("..")
+node_b = NodePath("../WheelRight")
+angular_limit_x/enabled = false
+
+[node name="AxleFrontLeft" type="Generic6DOFJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.1, 0.5)
+node_a = NodePath("..")
+node_b = NodePath("../WheelLeftFront")
+solver_priority = 2
+linear_limit_x/enabled = false
+linear_limit_y/upper_distance = 0.01
+linear_limit_y/lower_distance = -0.01
+linear_limit_z/enabled = false
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="AxleFrontRight" type="Generic6DOFJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.1, 0.5)
+node_a = NodePath("..")
+node_b = NodePath("../WheelRightFront")
+solver_priority = 2
+linear_limit_x/enabled = false
+linear_limit_y/enabled = false
+linear_limit_y/upper_distance = 0.01
+linear_limit_y/lower_distance = -0.01
+linear_limit_z/enabled = false
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="HingeFrontLeft" type="HingeJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.4, 0.18, 0.58)
+node_a = NodePath("..")
+node_b = NodePath("../WheelLeftFront")
+params/bias = 0.1
+
+[node name="HingeFrontRight" type="HingeJoint3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.4, 0.18, 0.58)
+node_a = NodePath("..")
+node_b = NodePath("../WheelRightFront")
+params/bias = 0.1
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 16777216
+collision_mask = 16777216
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.651766, 0)
+shape = SubResource("SphereShape3D_3wm55")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.57005e-08, 0.438853, 0.293979)
+light_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 0.1
+spot_range = 30.0
+spot_angle = 35.0
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

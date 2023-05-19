@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b021vgmbie7ch"
+path="res://.godot/imported/roadCurvedSplit.obj-ee50d136b6193aabd15698b50b04308b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/roadCurvedSplit.obj-ee50d136b6193aabd15698b50b04308b.mesh"]
+
+source_file="res://Assets/Kenney/Racing Kit/Models/OBJ format/roadCurvedSplit.obj"
+dest_files=["res://.godot/imported/roadCurvedSplit.obj-ee50d136b6193aabd15698b50b04308b.mesh", "res://.godot/imported/roadCurvedSplit.obj-ee50d136b6193aabd15698b50b04308b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

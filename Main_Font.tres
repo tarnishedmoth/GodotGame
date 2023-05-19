@@ -1,0 +1,5 @@
+[gd_resource type="SystemFont" format=3 uid="uid://b7bjjt57hsrgp"]
+
+[resource]
+font_names = PackedStringArray("Impact")
+generate_mipmaps = true

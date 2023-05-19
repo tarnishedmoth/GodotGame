@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://lvs0d5n84upe"]
+
+[ext_resource type="Script" path="res://camera.gd" id="1_76n75"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_tlumy"]
+auto_exposure_enabled = true
+
+[node name="OuterGimbal" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06465, 0)
+script = ExtResource("1_76n75")
+rotationSensitivity = 1.0
+
+[node name="InnerGimbal" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="InnerGimbal"]
+transform = Transform3D(-1, -3.55271e-15, -8.74228e-08, -3.55271e-15, 1, 0, 8.74228e-08, 0, -1, 2.41828e-08, 0, -1.6947)
+attributes = SubResource("CameraAttributesPractical_tlumy")

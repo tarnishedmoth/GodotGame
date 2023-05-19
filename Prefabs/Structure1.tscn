@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyck84k7kcvjo"]
+
+[ext_resource type="Material" uid="uid://b8bmo0c4083yk" path="res://Assets/grid_light.tres" id="1_t674q"]
+
+[node name="StructureInst" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+use_collision = true
+collision_priority = 2.0
+size = Vector3(1.5, 0.8, 4)
+material = ExtResource("1_t674q")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 0.00471914, -5.72078)
+use_collision = true
+collision_priority = 2.0
+size = Vector3(1.5, 0.8, 7.574)
+material = ExtResource("1_t674q")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, 9.13817e-09, -8.69439e-08, 0, 0.994522, 0.104528, 8.74228e-08, 0.104528, -0.994522, 0, 0.005, 5.726)
+use_collision = true
+collision_priority = 2.0
+size = Vector3(1.5, 0.8, 7.574)
+material = ExtResource("1_t674q")

@@ -1,0 +1,31 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://csoae80ksj05v"]
+
+[ext_resource type="Shader" path="res://Shaders/Highlighter.gdshader" id="1_a0x77"]
+
+[sub_resource type="Gradient" id="Gradient_8x43f"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1hj8u"]
+gradient = SubResource("Gradient_8x43f")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8d78e"]
+render_priority = 0
+shader = ExtResource("1_a0x77")
+shader_parameter/shine_color = Color(0.145098, 0.0117647, 0.392157, 1)
+shader_parameter/cycle_interval = 2.0
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_width = 30.0
+
+[resource]
+next_pass = SubResource("ShaderMaterial_8d78e")
+blend_mode = 3
+albedo_texture = SubResource("GradientTexture2D_1hj8u")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 1.5
+rim = 0.03
+refraction_scale = -0.8
+shadow_to_opacity = true

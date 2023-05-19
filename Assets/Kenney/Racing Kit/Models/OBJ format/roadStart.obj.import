@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://by5r2sqjmntso"
+path="res://.godot/imported/roadStart.obj-8e7570beef89c3a99a24d61863992676.mesh"
+
+[deps]
+
+files=["res://.godot/imported/roadStart.obj-8e7570beef89c3a99a24d61863992676.mesh"]
+
+source_file="res://Assets/Kenney/Racing Kit/Models/OBJ format/roadStart.obj"
+dest_files=["res://.godot/imported/roadStart.obj-8e7570beef89c3a99a24d61863992676.mesh", "res://.godot/imported/roadStart.obj-8e7570beef89c3a99a24d61863992676.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

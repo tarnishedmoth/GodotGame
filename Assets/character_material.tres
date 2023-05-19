@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d3kofh6dj6fxl"]
+
+[ext_resource type="Texture2D" uid="uid://b8gdc0sxjdkai" path="res://Assets/Kenney/Prototype_textures/PNG/Purple/texture_05.png" id="1_swxx2"]
+
+[resource]
+albedo_texture = ExtResource("1_swxx2")
+roughness = 0.5
+rim_enabled = true
+rim = 0.6
+clearcoat = 0.1
+clearcoat_roughness = 0.15
+uv1_triplanar = true
+uv2_triplanar = true

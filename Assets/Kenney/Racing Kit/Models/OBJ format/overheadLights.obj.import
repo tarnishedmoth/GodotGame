@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ekgp728u2hfh"
+path="res://.godot/imported/overheadLights.obj-212839a8339baab4ef756a2c82141fbf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/overheadLights.obj-212839a8339baab4ef756a2c82141fbf.mesh"]
+
+source_file="res://Assets/Kenney/Racing Kit/Models/OBJ format/overheadLights.obj"
+dest_files=["res://.godot/imported/overheadLights.obj-212839a8339baab4ef756a2c82141fbf.mesh", "res://.godot/imported/overheadLights.obj-212839a8339baab4ef756a2c82141fbf.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjvfvjn7ff31i"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wqvxv"]
+margin = 0.5
+height = 3.0
+radius = 3.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wmdw0"]
+radius = 3.0
+height = 7.0
+radial_segments = 32
+rings = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cc53i"]
+transparency = 1
+blend_mode = 1
+disable_ambient_light = true
+albedo_color = Color(0.870588, 0.643137, 0.207843, 1)
+emission_enabled = true
+emission = Color(0.870844, 0.642335, 0.206836, 1)
+emission_energy_multiplier = 0.5
+
+[node name="Area3D_Win" type="Area3D"]
+collision_layer = 16777216
+collision_mask = 16777216
+input_ray_pickable = false
+priority = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CylinderShape3D_wqvxv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("CapsuleMesh_wmdw0")
+surface_material_override/0 = SubResource("StandardMaterial3D_cc53i")

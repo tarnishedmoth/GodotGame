@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://2tcehunm5aos"
+path="res://.godot/imported/roadCurved.obj-24895a70823f45d593ca631ac6644abb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/roadCurved.obj-24895a70823f45d593ca631ac6644abb.mesh"]
+
+source_file="res://Assets/Kenney/Racing Kit/Models/OBJ format/roadCurved.obj"
+dest_files=["res://.godot/imported/roadCurved.obj-24895a70823f45d593ca631ac6644abb.mesh", "res://.godot/imported/roadCurved.obj-24895a70823f45d593ca631ac6644abb.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

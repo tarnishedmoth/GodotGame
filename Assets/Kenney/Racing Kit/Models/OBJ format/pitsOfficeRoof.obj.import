@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dm2o40rraep3d"
+path="res://.godot/imported/pitsOfficeRoof.obj-35b5e9e1cdac7858bfcd1001119f3bdb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pitsOfficeRoof.obj-35b5e9e1cdac7858bfcd1001119f3bdb.mesh"]
+
+source_file="res://Assets/Kenney/Racing Kit/Models/OBJ format/pitsOfficeRoof.obj"
+dest_files=["res://.godot/imported/pitsOfficeRoof.obj-35b5e9e1cdac7858bfcd1001119f3bdb.mesh", "res://.godot/imported/pitsOfficeRoof.obj-35b5e9e1cdac7858bfcd1001119f3bdb.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

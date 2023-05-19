@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b5wwgmdokjlfm"
+path="res://.godot/imported/lightRed.obj-0ce7d18f1465478a80cedca817fbabcc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/lightRed.obj-0ce7d18f1465478a80cedca817fbabcc.mesh"]
+
+source_file="res://Assets/Kenney/Racing Kit/Models/OBJ format/lightRed.obj"
+dest_files=["res://.godot/imported/lightRed.obj-0ce7d18f1465478a80cedca817fbabcc.mesh", "res://.godot/imported/lightRed.obj-0ce7d18f1465478a80cedca817fbabcc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://p5b068bu25k3"]
+
+[ext_resource type="Script" path="res://Scripts/Collectible.gd" id="1_ikb15"]
+[ext_resource type="Material" uid="uid://qe7d5p7thf3b" path="res://Assets/highlighted_blue.tres" id="2_uvksv"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0miyj"]
+material = ExtResource("2_uvksv")
+radius = 0.25
+height = 1.0
+radial_segments = 16
+rings = 3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bl6jp"]
+
+[node name="CollectablePrefab" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+collision_layer = 33554432
+collision_mask = 33554432
+script = ExtResource("1_ikb15")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_0miyj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("SphereShape3D_bl6jp")

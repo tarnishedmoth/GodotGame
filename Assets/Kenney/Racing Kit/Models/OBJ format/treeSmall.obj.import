@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cycf53lt052tj"
+path="res://.godot/imported/treeSmall.obj-dbcc7ed5375c01a8536ccc0f89e8a359.mesh"
+
+[deps]
+
+files=["res://.godot/imported/treeSmall.obj-dbcc7ed5375c01a8536ccc0f89e8a359.mesh"]
+
+source_file="res://Assets/Kenney/Racing Kit/Models/OBJ format/treeSmall.obj"
+dest_files=["res://.godot/imported/treeSmall.obj-dbcc7ed5375c01a8536ccc0f89e8a359.mesh", "res://.godot/imported/treeSmall.obj-dbcc7ed5375c01a8536ccc0f89e8a359.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

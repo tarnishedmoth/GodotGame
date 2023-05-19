@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://cum4mtd8upwlk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8rf61"]
+noise_type = 3
+seed = 333
+frequency = 0.008
+fractal_type = 3
+fractal_weighted_strength = 0.14
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fv7sb"]
+width = 1024
+height = 1024
+in_3d_space = true
+seamless = true
+seamless_blend_skirt = 0.127
+normalize = false
+noise = SubResource("FastNoiseLite_8rf61")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xmq6i"]
+sky_top_color = Color(0.270588, 0.458824, 0.666667, 1)
+sky_horizon_color = Color(0.647059, 0.654902, 0.670588, 1)
+sky_curve = 0.14489
+sky_cover = SubResource("NoiseTexture2D_fv7sb")
+sky_cover_modulate = Color(0.392157, 0.392157, 0.392157, 0.133333)
+ground_bottom_color = Color(0.647059, 0.654902, 0.670588, 1)
+ground_horizon_color = Color(0.701961, 0.709804, 0.721569, 1)
+ground_curve = 0.0649809
+ground_energy_multiplier = 0.8
+sun_angle_max = 35.62
+sun_curve = 0.117688
+
+[sub_resource type="Sky" id="Sky_127qe"]
+sky_material = SubResource("ProceduralSkyMaterial_xmq6i")
+
+[sub_resource type="Environment" id="Environment_tt7c7"]
+background_mode = 2
+sky = SubResource("Sky_127qe")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+ssao_enabled = true
+ssao_radius = 0.5
+ssil_enabled = true
+ssil_radius = 7.0
+sdfgi_enabled = true
+sdfgi_bounce_feedback = 0.6
+sdfgi_min_cell_size = 0.5
+sdfgi_energy = 1.2
+fog_density = 0.5
+fog_aerial_perspective = 0.536
+fog_height = -100.0
+fog_height_density = 16.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.07
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_anisotropy = 0.3
+volumetric_fog_length = 48.0
+volumetric_fog_ambient_inject = 0.01
+volumetric_fog_temporal_reprojection_amount = 0.99
+
+[node name="Environment" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.183951, 0.326493, -0.927127, 0, 0.943223, 0.332161, 0.982935, -0.0611014, 0.173507, 0, 0, 0)
+light_energy = 0.8
+light_volumetric_fog_energy = 0.8
+shadow_enabled = true
+shadow_transmittance_bias = 0.5
+shadow_blur = 1.1
+directional_shadow_split_1 = 0.04
+directional_shadow_split_2 = 0.14
+directional_shadow_split_3 = 0.35
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 150.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tt7c7")

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://kv0dj2jkmgut"
+path="res://.godot/imported/roadCornerLargerWallInner.obj-73969de64627b8bd8850b147b2018e53.mesh"
+
+[deps]
+
+files=["res://.godot/imported/roadCornerLargerWallInner.obj-73969de64627b8bd8850b147b2018e53.mesh"]
+
+source_file="res://Assets/Kenney/Racing Kit/Models/OBJ format/roadCornerLargerWallInner.obj"
+dest_files=["res://.godot/imported/roadCornerLargerWallInner.obj-73969de64627b8bd8850b147b2018e53.mesh", "res://.godot/imported/roadCornerLargerWallInner.obj-73969de64627b8bd8850b147b2018e53.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

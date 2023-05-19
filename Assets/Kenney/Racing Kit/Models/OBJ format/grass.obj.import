@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://k73y6cct12gf"
+path="res://.godot/imported/grass.obj-3c824fbd184491bf859bebb75e11b3ea.mesh"
+
+[deps]
+
+files=["res://.godot/imported/grass.obj-3c824fbd184491bf859bebb75e11b3ea.mesh"]
+
+source_file="res://Assets/Kenney/Racing Kit/Models/OBJ format/grass.obj"
+dest_files=["res://.godot/imported/grass.obj-3c824fbd184491bf859bebb75e11b3ea.mesh", "res://.godot/imported/grass.obj-3c824fbd184491bf859bebb75e11b3ea.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

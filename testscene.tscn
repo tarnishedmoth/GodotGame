@@ -1,0 +1,350 @@
+[gd_scene load_steps=34 format=3 uid="uid://b8ubxykq6n4h7"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_4vxpc"]
+[ext_resource type="Material" uid="uid://fi27wo743l37" path="res://Assets/grid_orange.tres" id="1_8lung"]
+[ext_resource type="Material" uid="uid://b8bmo0c4083yk" path="res://Assets/grid_light.tres" id="1_m6etw"]
+[ext_resource type="Script" path="res://DebugTools.gd" id="2_x012n"]
+[ext_resource type="Material" uid="uid://dumh0lj22ut5s" path="res://Assets/grid_green.tres" id="3_cu5rt"]
+[ext_resource type="Material" uid="uid://dq6ecs6jdsii4" path="res://Assets/grid_purple.tres" id="3_yhe67"]
+[ext_resource type="Material" uid="uid://5qwyhbkt8rel" path="res://Assets/grid_dark.tres" id="5_bfab8"]
+[ext_resource type="PackedScene" uid="uid://dyck84k7kcvjo" path="res://Prefabs/Structure1.tscn" id="6_jj8ar"]
+[ext_resource type="Shader" path="res://Shaders/LowPolyWater.gdshader" id="6_ry3lq"]
+[ext_resource type="PackedScene" uid="uid://bkosglkth7pjo" path="res://player.tscn" id="6_xloyh"]
+[ext_resource type="PackedScene" uid="uid://bjvfvjn7ff31i" path="res://win_area.tscn" id="7_bdkna"]
+[ext_resource type="Script" path="res://ScoreLabel.gd" id="8_nfj4i"]
+[ext_resource type="Shader" path="res://Shaders/Redacted.gdshader" id="10_2qq8s"]
+[ext_resource type="AudioStream" uid="uid://dl7nyty4n7k3v" path="res://Assets/IRL/brogans_bell.wav" id="10_o6aqy"]
+[ext_resource type="SystemFont" uid="uid://b7bjjt57hsrgp" path="res://Main_Font.tres" id="10_td1qs"]
+[ext_resource type="Script" path="res://Scripts/crescendo.gd" id="11_lxx4g"]
+[ext_resource type="PackedScene" uid="uid://lvs0d5n84upe" path="res://Prefabs/CameraGimbal.tscn" id="14_kjoo6"]
+[ext_resource type="Script" path="res://Scripts/UserInterface.gd" id="15_2fsyw"]
+[ext_resource type="PackedScene" uid="uid://dcotg6x5t8xg2" path="res://Environments/EnvironmentDusk.tscn" id="19_ctcxk"]
+[ext_resource type="PackedScene" uid="uid://p5b068bu25k3" path="res://Prefabs/Collectible.tscn" id="19_t22fx"]
+[ext_resource type="PackedScene" uid="uid://dw6o2cwfvboyo" path="res://Prefabs/NPC/GhostGuy.tscn" id="20_f7o1a"]
+[ext_resource type="Script" path="res://Scripts/LFO.gd" id="21_ejyw2"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_n5v4b"]
+material = ExtResource("5_bfab8")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_oys14"]
+material = ExtResource("5_bfab8")
+top_radius = 0.2
+height = 9.0
+radial_segments = 16
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xlfon"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uhwjy"]
+margin = 0.06
+size = Vector3(60, 0.28, 60)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jwa30"]
+render_priority = 0
+shader = ExtResource("6_ry3lq")
+shader_parameter/out_color = Color(0.168627, 0.560784, 0.839216, 0.745098)
+shader_parameter/amount = 0.4
+shader_parameter/speed = 1.0
+shader_parameter/beer_factor = 0.0
+shader_parameter/metallic = 0.8
+shader_parameter/specular = 1.0
+shader_parameter/roughness = 0.35
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lo3ow"]
+material = SubResource("ShaderMaterial_jwa30")
+size = Vector2(18.5, 18.5)
+subdivide_width = 24
+subdivide_depth = 48
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dr5kg"]
+albedo_color = Color(0.992157, 0.588235, 0, 1)
+refraction_scale = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c1opu"]
+render_priority = 0
+shader = ExtResource("10_2qq8s")
+shader_parameter/scroll_speed = Vector2(3, 5)
+shader_parameter/static_intensity = 0.3
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/tex_scale = 3.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_apxya"]
+material = SubResource("ShaderMaterial_c1opu")
+
+[sub_resource type="Curve3D" id="Curve3D_gefmv"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2, 0, 0, 0, 0, 0, 0, 0, 1, -6, 0, 0, 0, 0, 0, 0, 0, 0, -8, 0, 0, 0, 0, 0, 0, 0, 0.5, -14, 0, 0, 0, 0, 0, 0, 10, -1, -16),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="Theme" id="Theme_8vu1u"]
+default_font = ExtResource("10_td1qs")
+default_font_size = 24
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_4vxpc")
+
+[node name="DebugTools" type="Node" parent="."]
+script = ExtResource("2_x012n")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="World"]
+transform = Transform3D(-0.183013, -0.707107, 0.683013, -0.183013, 0.707107, 0.683013, -0.965926, 0, -0.258819, 0, 7.39632, -24.6611)
+light_color = Color(0.977459, 0.999996, 0.802444, 1)
+light_energy = 2.0
+shadow_enabled = true
+spot_range = 40.0
+spot_attenuation = 0.318641
+spot_angle = 47.44
+spot_angle_attenuation = 0.757859
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/SpotLight3D"]
+transform = Transform3D(0.972581, -0.232563, 0, 0.232563, 0.972582, 0, -4.47035e-08, 1.86265e-08, 1, -3.8147e-06, 1.43051e-06, 0.567284)
+mesh = SubResource("PrismMesh_n5v4b")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="World/SpotLight3D"]
+transform = Transform3D(0.979378, -0.186806, 0.0769642, 0.186805, 0.692143, -0.697167, 0.0769642, 0.697168, 0.712766, 0.690004, -2.4695, -1.55488)
+mesh = SubResource("CylinderMesh_oys14")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6129, 3.06954, 5.04229)
+light_color = Color(0.976471, 1, 0.803922, 1)
+light_size = 0.1
+shadow_enabled = true
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.91019, 3.06954, 5.04229)
+light_color = Color(0.976471, 1, 0.803922, 1)
+light_size = 0.1
+shadow_enabled = true
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.62199, 3.06954, -5.09419)
+light_color = Color(0.976471, 1, 0.803922, 1)
+light_size = 0.1
+shadow_enabled = true
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9011, 3.06954, -5.09419)
+light_color = Color(0.976471, 1, 0.803922, 1)
+light_size = 0.1
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World"]
+physics_material_override = SubResource("PhysicsMaterial_xlfon")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D"]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+shape = SubResource("BoxShape3D_uhwjy")
+
+[node name="Ground" type="CSGCombiner3D" parent="World/StaticBody3D"]
+use_collision = true
+
+[node name="GroundCSG" type="CSGBox3D" parent="World/StaticBody3D/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+cast_shadow = 0
+gi_lightmap_scale = 1
+collision_priority = 2.0
+size = Vector3(60, 0.25, 60)
+material = ExtResource("1_8lung")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/StaticBody3D/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6283, 0, -15.9792)
+operation = 2
+size = Vector3(19, 1, 19)
+
+[node name="Pool" type="CSGCombiner3D" parent="World/StaticBody3D"]
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/StaticBody3D/Pool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.628, -1, -15.979)
+size = Vector3(20, 4, 20)
+material = ExtResource("1_8lung")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World/StaticBody3D/Pool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6283, 0, -15.9792)
+operation = 2
+radius = 8.61084
+sides = 64
+material = ExtResource("3_cu5rt")
+
+[node name="CSGBox3D3" type="CSGPolygon3D" parent="World/StaticBody3D/Pool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.628, 0, -21.979)
+polygon = PackedVector2Array(6, 0, 0, 0, 0, 1)
+depth = 1.5
+material = ExtResource("1_8lung")
+
+[node name="Water" type="MeshInstance3D" parent="World/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6283, -0.598999, -15.9792)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_lo3ow")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="World/StaticBody3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 26)
+use_collision = true
+polygon = PackedVector2Array(-4, 4, -4, 0, 0, 0, 24, 0, 0, 4)
+depth = 4.0
+material = ExtResource("3_cu5rt")
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="World/StaticBody3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 27, 4, 26)
+use_collision = true
+polygon = PackedVector2Array(-4, 4, -4, 0, 0, 0, 24, 0, 0, 4)
+depth = 4.0
+material = ExtResource("3_cu5rt")
+
+[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="World/StaticBody3D"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 27, 8, 2)
+use_collision = true
+polygon = PackedVector2Array(-4, 4, -4, 0, 0, 0, 24, 0, 0, 4)
+depth = 4.0
+material = ExtResource("3_cu5rt")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="World"]
+material_override = ExtResource("1_m6etw")
+use_collision = true
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.353, 2, 0)
+use_collision = true
+size = Vector3(1, 4, 10)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.032, 2, 0)
+material_override = SubResource("StandardMaterial3D_dr5kg")
+use_collision = true
+size = Vector3(1, 4, 10)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="World/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246, 1.5, 0)
+operation = 2
+use_collision = true
+size = Vector3(6, 3, 4)
+
+[node name="RampCSG" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0.197778, 0, 3.93732)
+use_collision = true
+size = Vector3(4, 0.67, 4)
+material = ExtResource("3_yhe67")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 2.5, -1)
+size = Vector3(0.5, 5, 14)
+material = ExtResource("1_m6etw")
+
+[node name="EdgeWall1" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 30)
+size = Vector3(60, 10, 1)
+material = ExtResource("1_m6etw")
+
+[node name="EdgeWall2" type="CSGBox3D" parent="World"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -30, 5, 0)
+size = Vector3(60, 10, 1)
+material = ExtResource("3_cu5rt")
+
+[node name="EdgeWall3" type="CSGBox3D" parent="World"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 5, -30)
+size = Vector3(60, 10, 1)
+material = ExtResource("1_m6etw")
+
+[node name="EdgeWall4" type="CSGBox3D" parent="World"]
+transform = Transform3D(4.37114e-08, 0, 1, 0, 1, 0, -1, 0, 4.37114e-08, 30, 5, 0)
+size = Vector3(60, 10, 1)
+material = ExtResource("3_cu5rt")
+
+[node name="StructureInst" parent="World" instance=ExtResource("6_jj8ar")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7055, -0.0261657, 0)
+
+[node name="Clouds" type="Node3D" parent="World"]
+
+[node name="FogVolume" type="FogVolume" parent="World/Clouds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4993, 23.29, -21.3511)
+size = Vector3(33.2524, 1.16644, 46.2419)
+shape = 0
+
+[node name="FogVolume2" type="FogVolume" parent="World/Clouds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.8829, 22.4603, -19.2622)
+size = Vector3(22.0912, 1.16644, 38.3005)
+shape = 0
+
+[node name="FogVolume3" type="FogVolume" parent="World/Clouds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1096, 27.4245, 25.3886)
+size = Vector3(25.7492, 1.16644, 46.2419)
+shape = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World"]
+transform = Transform3D(0.866025, -0.5, 0, 0.353553, 0.612372, 0.707107, -0.353553, -0.612372, 0.707107, 0, 5, 2)
+mesh = SubResource("BoxMesh_apxya")
+
+[node name="StreetPath3D" type="Path3D" parent="World"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 20, 0, 1)
+curve = SubResource("Curve3D_gefmv")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="World/StreetPath3D"]
+use_collision = true
+polygon = PackedVector2Array(-0.5, 0, -1, 1, -0.5, 0.8, 0.5, 0.8, 1, 1, 0.5, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = ExtResource("3_cu5rt")
+
+[node name="Player" parent="." instance=ExtResource("6_xloyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.108219, 0)
+
+[node name="OuterGimbal" parent="Player" instance=ExtResource("14_kjoo6")]
+
+[node name="Win_Area" parent="." instance=ExtResource("7_bdkna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.85, 0, -0.142)
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8vu1u")
+script = ExtResource("15_2fsyw")
+
+[node name="ScoreLabel" type="Label" parent="UserInterface"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 59.0
+offset_top = 60.0
+offset_right = 246.0
+offset_bottom = 104.0
+text = "Did you win?: not yet."
+script = ExtResource("8_nfj4i")
+label = "Did you win?: %s"
+
+[node name="Win_AudioPlayer" type="AudioStreamPlayer" parent="UserInterface/ScoreLabel"]
+stream = ExtResource("10_o6aqy")
+volume_db = -4.0
+max_polyphony = 4
+bus = &"BlownOut"
+script = ExtResource("11_lxx4g")
+crescendo_rate = 0.01
+
+[node name="CollectablePrefab" parent="." instance=ExtResource("19_t22fx")]
+
+[node name="Environment" parent="." instance=ExtResource("19_ctcxk")]
+
+[node name="GhostGuy" parent="." instance=ExtResource("20_f7o1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00204027, 0.015, 1.73073)
+
+[node name="LFO" type="Node" parent="GhostGuy"]
+script = ExtResource("21_ejyw2")
+amplitude = 0.03
+frequency = 1
+yFactor = 1.0
+
+[connection signal="body_entered" from="Win_Area" to="Player" method="_on_win_area_body_entered"]
