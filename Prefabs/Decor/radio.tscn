@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3a8ab4n8j8n4"]
+
+[ext_resource type="Material" uid="uid://dq6ecs6jdsii4" path="res://Assets/grid_purple.tres" id="1_w2so5"]
+[ext_resource type="Material" uid="uid://b8bmo0c4083yk" path="res://Assets/grid_light.tres" id="2_4iec3"]
+[ext_resource type="Material" uid="uid://5qwyhbkt8rel" path="res://Assets/grid_dark.tres" id="3_ehy31"]
+[ext_resource type="AudioStream" uid="uid://kqucakhd6s4k" path="res://Assets/Sounds/homemade/Ben/RadioStatic.wav" id="4_uqxni"]
+[ext_resource type="AudioStream" uid="uid://h57hdi8sqkb8" path="res://Assets/Sounds/homemade/Creepy clown ghost.wav" id="5_7ex8f"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1rjgm"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.08
+
+[sub_resource type="BoxMesh" id="BoxMesh_2o1js"]
+size = Vector3(0.552, 0.035, 0.219)
+
+[node name="Radio" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_w2so5")
+mesh = SubResource("CylinderMesh_1rjgm")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.518393, 0, 0)
+material_override = ExtResource("1_w2so5")
+mesh = SubResource("CylinderMesh_1rjgm")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.260576, 0, -0.0218127)
+material_override = ExtResource("2_4iec3")
+mesh = SubResource("BoxMesh_2o1js")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.409, 0, 0, 0, 0.409, 0, 0, 0, 0.409, 0.260576, 0.0171139, -0.0481922)
+material_override = ExtResource("3_ehy31")
+mesh = SubResource("BoxMesh_2o1js")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.265981, 0, 0)
+stream = ExtResource("4_uqxni")
+unit_size = 0.3
+autoplay = true
+emission_angle_degrees = 27.7
+doppler_tracking = 2
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22998, 0, 0)
+stream = ExtResource("5_7ex8f")
+volume_db = -32.0
+unit_size = 0.1
